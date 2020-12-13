@@ -36,11 +36,13 @@ def all_users():
 @app.route('/projects/', methods=['GET', 'POST'])
 def jsonproj():
     if request.method == 'GET':
-        selection = request.args['selection']
-        return_value = [
-            row for row in Projects.select().where(
-                Projects.project_id == selection).dicts()]
-        return render_template('projects.j2', proj=return_value)
+        all_proj = [row for row in Projects.select().dicts()]
+        selection = request.args.get('selection')
+        return_value = Projects.select().where(
+                Projects.project_id == selection)
+
+        return render_template(
+            'projects.j2', proj=return_value, all_proj=all_proj)
 
 
 @app.route('/investments')

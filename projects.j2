@@ -1,0 +1,84 @@
+{% extends "template.j2" %}
+
+{% block myscript %}
+<script>
+  function showproj(str) {
+    if (str == "") {
+    document.getElementById("result").innerHTML = "";
+    return;
+    } 
+      var req = new XMLHttpRequest();
+      req.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("result").innerHTML = this.responseText;
+      }
+    }
+    req.open("GET", "/projects?selection="+str,true);
+    req.send();
+  }
+</script>
+
+{% endblock myscript %}
+
+{% block navbar %}
+<li><a href="/">Home</a></li>
+<li class="active"><a href="#">Projects</a></li>
+<li><a href="/investments">Investments</a></li>
+<li><a href="/allusers">Users</a></li>
+<li><a href="/manage">manage</a></li>
+
+{% endblock navbar %}
+
+{% block page %}
+
+<div class="container">
+<h1>View projects</h1>
+
+<form action="" method="GET"> 
+<select name="selection" id="selection" onchange="showproj(this.value)">
+<option value="">Select a project:</option>
+{% for p in all_proj %}
+  <option value="{{p['project_id']}}">{{p['project_name']}}</option>
+{% endfor %}
+</select>
+</form>
+<br>
+</div>
+
+<div class="container" id="result">
+  
+  <hr>
+  <h2>Projects</h2>
+  <p>List of all active projecct</p>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Project</th>
+        <th>Budget</th>
+        <th>Forcast</th>
+        <th>End date</th>
+        <th>Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for p in proj %}
+        <tr method="GET" action="/projects/">
+          <td>
+            <a href="/projects/{{p['project_id']}}">
+              {{p['project_id']}}
+            </a>
+          </td>
+          <td>{{p['project_name']}}</td>
+          <td>{{p['budget']}}</td>
+          <td>{{p['forcast']}}</td>
+          <td>{{p['completion']}}</td>
+          <td>{{p['comments']}}</td>
+        </tr>
+        {% endfor %}     
+    </tbody>
+  </table>
+</div>
+
+{% endblock page %}
