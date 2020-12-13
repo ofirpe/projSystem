@@ -1,18 +1,20 @@
 {% extends "template.j2" %}
 
 {% block myscript %}
-<script type="text/javascript">
+<script>
   function showproj(str) {
-    var req = new XMLHttpRequest();
-    var result = document.getElementById('result');
-    req.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        result.innerHTML = this.responseText;
+    if (str == "") {
+    document.getElementById("result").innerHTML = "";
+    return;
+    } 
+      var req = new XMLHttpRequest();
+      req.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("result").innerHTML = this.responseText;
       }
-    };
-    req.open("GET", "/projects", true);
-    req.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-    req.send("selection=" + document.getElementById('selection').value));
+    }
+    req.open("GET", "/projects?selection="+str,true);
+    req.send();
   }
 </script>
 
@@ -32,17 +34,20 @@
 <div class="container">
 <h1>View projects</h1>
 
-<form action=""> 
-<select name="selection" onchange="showproj(this.value)">
+<form action="" method="GET"> 
+<select name="selection" id="selection" onchange="showproj(this.value)">
 <option value="">Select a project:</option>
-{% for p in proj %}
+{% for p in all_proj %}
   <option value="{{p['project_id']}}">{{p['project_name']}}</option>
 {% endfor %}
 </select>
 </form>
 <br>
 </div>
+
 <div class="container" id="result">
+  
+  <hr>
   <h2>Projects</h2>
   <p>List of all active projecct</p>
   
