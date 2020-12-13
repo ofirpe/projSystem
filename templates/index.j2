@@ -1,0 +1,26 @@
+{% extends "template.j2" %}
+
+{% block navbar %}
+<li class="active"><a href="#">Home</a></li>
+<li><a href="/projects">Projects</a></li>
+<li><a href="/investments">Investments</a></li>
+<li><a href="/allusers">Users</a></li>
+<li><a href="/manage">manage</a></li>
+
+{% endblock navbar %}
+
+{% block page %}
+
+<div class="jumbotron text-center" style="background-color: rgba(42, 192, 192, 0.411);">
+    <h1>Project management system</h1>
+    <p>This site is used for the purpose of managing investment projects</p>
+    </div>
+
+<div style="overflow:auto">
+  <div class="text-center">
+    <h2>About this system</h2>
+    <p>With this system you can manage your investments.</p>
+  </div>
+</div>
+
+{% endblock page %}

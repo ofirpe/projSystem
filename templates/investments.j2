@@ -1,0 +1,45 @@
+{% extends "template.j2" %}
+
+{% block navbar %}
+<li><a href="/">Home</a></li>
+<li><a href="/projects">Projects</a></li>
+<li class="active"><a href="#">Investments</a></li>
+<li><a href="/allusers">Users</a></li>
+<li><a href="/manage">manage</a></li>
+
+{% endblock navbar %}
+
+{% block page %}
+
+<div class="container">
+  <h2>Investments</h2>
+  <p>List of all investments made</p>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Project</th>
+        <th>Investment</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in inv %}
+        <tr>
+          <td>
+            <a href="/editinv/{{i['investment_id']}}">
+              {{i['investment_id']}}
+            </a>
+          </td>
+          <td>{{i['project_name']}}</td>
+          <td>{{i['investment']}}</td>
+          <td>{{i['investment_date']}}</td>
+        </tr>
+        {% endfor %}     
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock page %}

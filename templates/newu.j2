@@ -1,0 +1,33 @@
+{% extends "template.j2" %}
+
+{% block navbar %}
+<li><a href="/">Home</a></li>
+<li><a href="/projects">Projects</a></li>
+<li><a href="/investments">Investments</a></li>
+<li><a href="/allusers">Users</a></li>
+<li><a href="/manage">manage</a></li>
+
+{% endblock navbar %}
+
+{% block page %}
+
+<div class="container">
+  <h2>Create a new user</h2>
+  <form action="/newu" onsubmit="return confirm('this would create a new user. are you sure?');" method="POST">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required >
+    </div>
+    <div class="form-group">
+      <label for="first_name">First name:</label>
+      <input type="text" class="form-control" id="first_name" placeholder="First name" name="first_name" required >
+    </div>
+    <div class="form-group">
+      <label for="last_name">Last name:</label>
+      <input type="text" class="form-control" id="last_name" placeholder="Last name" name="last_name" required >
+    </div>
+     <button type="submit" class="btn btn-info">Submit</button>
+  </form>
+</div> 
+
+{% endblock page %}

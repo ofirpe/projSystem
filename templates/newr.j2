@@ -1,0 +1,25 @@
+{% extends "template.j2" %}
+
+{% block navbar %}
+<li><a href="/">Home</a></li>
+<li><a href="/projects">Projects</a></li>
+<li><a href="/investments">Investments</a></li>
+<li><a href="/allusers">Users</a></li>
+<li><a href="/manage">manage</a></li>
+
+{% endblock navbar %}
+
+{% block page %}
+
+<div class="container">
+  <h2>Create new role</h2>
+  <form action="/newr" onsubmit="return confirm('this would create a new role. are you sure?');" method="POST">
+    <div class="form-group">
+      <label for="title">Role title:</label>
+      <input type="text" class="form-control" id="title" placeholder="Enter role name" name="title" required >
+    </div>
+     <button type="submit" class="btn btn-info">Submit</button>
+  </form>
+</div>  
+
+{% endblock page %}

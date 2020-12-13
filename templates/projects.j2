@@ -1,0 +1,79 @@
+{% extends "template.j2" %}
+
+{% block myscript %}
+<script type="text/javascript">
+  function showproj(str) {
+    var req = new XMLHttpRequest();
+    var result = document.getElementById('result');
+    req.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        result.innerHTML = this.responseText;
+      }
+    };
+    req.open("GET", "/projects", true);
+    req.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+    req.send("selection=" + document.getElementById('selection').value));
+  }
+</script>
+
+{% endblock myscript %}
+
+{% block navbar %}
+<li><a href="/">Home</a></li>
+<li class="active"><a href="#">Projects</a></li>
+<li><a href="/investments">Investments</a></li>
+<li><a href="/allusers">Users</a></li>
+<li><a href="/manage">manage</a></li>
+
+{% endblock navbar %}
+
+{% block page %}
+
+<div class="container">
+<h1>View projects</h1>
+
+<form action=""> 
+<select name="selection" onchange="showproj(this.value)">
+<option value="">Select a project:</option>
+{% for p in proj %}
+  <option value="{{p['project_id']}}">{{p['project_name']}}</option>
+{% endfor %}
+</select>
+</form>
+<br>
+</div>
+<div class="container" id="result">
+  <h2>Projects</h2>
+  <p>List of all active projecct</p>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Project</th>
+        <th>Budget</th>
+        <th>Forcast</th>
+        <th>End date</th>
+        <th>Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for p in proj %}
+        <tr method="GET" action="/projects/">
+          <td>
+            <a href="/projects/{{p['project_id']}}">
+              {{p['project_id']}}
+            </a>
+          </td>
+          <td>{{p['project_name']}}</td>
+          <td>{{p['budget']}}</td>
+          <td>{{p['forcast']}}</td>
+          <td>{{p['completion']}}</td>
+          <td>{{p['comments']}}</td>
+        </tr>
+        {% endfor %}     
+    </tbody>
+  </table>
+</div>
+
+{% endblock page %}

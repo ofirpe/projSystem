@@ -1,0 +1,44 @@
+{% extends "template.j2" %}
+
+{% block navbar %}
+<li><a href="/">Home</a></li>
+<li><a href="/projects">Projects</a></li>
+<li><a href="/investments">Investments</a></li>
+<li><a href="/allusers">Users</a></li>
+<li><a href="/manage">manage</a></li>
+
+{% endblock navbar %}
+
+{% block page %}
+
+<div class="container">
+  <h2>Create a new project</h2>
+  <form action="/newp" onsubmit="return confirm('this would create a new project. are you sure?');" method="POST">
+    <div class="form-group">
+      <label for="project_name">Project Name:</label>
+      <input type="text" class="form-control" id="project_name" placeholder="Enter project name" name="project_name" required >
+    </div>
+    <div class="form-group">
+      <label for="budget">Budget:</label>
+      <input type="number" class="form-control" id="budget" placeholder="Enter budget" name="budget" required >
+    </div>
+    <div class="form-group">
+      <label for="forcast">Forcast:</label>
+      <input type="number" class="form-control" id="forcast" placeholder="Enter forcast" name="forcast" required >
+    </div>
+    <div class="form-group">
+      <label for="completion">End date:</label>
+      <input type="date" class="form-control" id="completion" placeholder="Enter ending date" name="completion" required >
+    </div>
+    <div class="form-group">
+      <label for="comments">Comments:</label>
+      <textarea type="text" class="form-control" id="comments" placeholder="Enter comments" name="comments"></textarea>
+    </div>
+     <button type="submit" class="btn btn-info">Submit</button>
+  </form>
+</div>
+
+  
+  
+
+{% endblock page %}

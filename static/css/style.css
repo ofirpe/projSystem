@@ -1,0 +1,80 @@
+/* credit: https://www.w3schools.com/html/tryit.asp?filename=tryhtml_responsive_page */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+.menu {
+  float: left;
+  width: 20%;
+}
+.menuitem {
+  padding: 8px;
+  margin-top: 7px;
+  border-bottom: 1px solid #f1f1f1;
+}
+.main {
+  float: left;
+  width: 60%;
+  padding: 0 20px;
+  overflow: hidden;
+}
+.right {
+  background-color: lightblue;
+  float: left;
+  width: 20%;
+  padding: 10px 15px;
+  margin-top: 7px;
+}
+
+@media only screen and (max-width:800px) {
+  /* For tablets: */
+  .main {
+    width: 80%;
+    padding: 0;
+  }
+  .right {
+    width: 100%;
+  }
+}
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .menu, .main, .right {
+    width: 100%;
+  }
+}
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -10vh; 
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.site-footer, .page-wrap:after {
+  /* .push must be the same height as footer */
+  height: 10vh; 
+}
+.site-footer {
+  background-color: rgba(42, 192, 192, 0.411);
+  color: gray;
+  text-align: center;
+}
+.container {
+  margin-bottom: 2vh;
+}
+.button-group {
+  display: block;
+}
+.btn-default {
+  display: block;
+  background-color: rgb(167, 211, 223);
+  margin: 3px;
+  width:30%;
+}
+.btn-default:hover {
+  background-color: rgb(104, 186, 209);
+}

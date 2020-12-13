@@ -1,0 +1,35 @@
+{% extends "template.j2" %}
+
+{% block navbar %}
+<li><a href="/">Home</a></li>
+<li><a href="/projects">Projects</a></li>
+<li><a href="/investments">Investments</a></li>
+<li class="active"><a href="#">Users</a></li>
+<li><a href="/manage">manage</a></li>
+
+{% endblock navbar %}
+
+{% block page %}
+<div class="container">
+  <h2>Users</h2>
+  <p>List of all users and their role</p>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>First name</th>
+        <th>Last name</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+          <td>{{user['first_name']}}</td>
+          <td>{{user['last_name']}}</td>
+        </tr>
+        {% endfor %}     
+    </tbody>
+  </table>
+</div>
+
+{% endblock page %}                  

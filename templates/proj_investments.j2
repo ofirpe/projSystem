@@ -1,0 +1,79 @@
+{% extends "template.j2" %}
+
+{% block navbar %}
+<li><a href="/">Home</a></li>
+<li><a href="/projects">Projects</a></li>
+<li><a href="/investments">Investments</a></li>
+<li><a href="/allusers">Users</a></li>
+<li><a href="/manage">manage</a></li>
+
+{% endblock navbar %}
+
+{% block page %}
+
+<div class="container">
+  <h2>Investments per project</h2>
+  <p>List of all investments for a project</p>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Project</th>
+        <th>Budget</th>
+        <th>Forcast</th>
+        <th>End date</th>
+        <th>Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <a href="/investments/{{proj['investment_id']}}">
+            <td>{{proj['project_name']}}</td>
+          </a>
+          <td>{{proj['budget']}}</td>
+          <td>{{proj['forcast']}}</td>
+          <td>{{proj['completion']}}</td>
+          <td>{{proj['comments']}}</td>
+        </tr>   
+    </tbody>
+  </table>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for u in users %}
+        <tr>
+          <td>{{u['first_name']}} {{u['last_name']}}</td>
+          <td>{{u['title']}}</td>
+        </tr>
+        {% endfor %}     
+    </tbody>
+  </table>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Investment</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in inv %}
+        <tr>
+          <td>{{i['investment_date']}}</td>
+          <td>{{i['investment']}}</td>
+        </tr>
+        {% endfor %}     
+    </tbody>
+    <tfoot>
+      <tr>
+        <td><b>Total investment</b></td>
+        <td><b>{{total}}</b></td>
+      </tr>
+  </table>
+  
+{% endblock page %}
